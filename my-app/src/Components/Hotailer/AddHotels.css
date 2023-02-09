@@ -1,0 +1,61 @@
+.add-hotels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.add-hotels input::placeholder{
+    color: rgb(87, 83, 83);
+}
+.add-hotels textarea{
+  
+}
+.add-hotels input,.add-hotels select,.add-hotels textarea{
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    display: block;
+    outline: none;
+    border: 2px solid black;
+    padding: 0.3rem;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.add-hotels input:focus,.add-hotels select:focus, .add-hotels textarea:focus{
+    border: 2px solid rgb(98, 98, 243);
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    
+}
+.add-hotels .description{
+   width: 100%;
+}
+.add-hotels form{
+
+    padding: 2rem;
+    display: grid;
+    justify-content: center;
+    gap: 2rem;
+   
+}
+.hotel-address{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2rem;
+    padding: 0 1rem;
+}
+.hotel-images{
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+}
+.submit-hotel{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+}
+.error{
+    color:red;
+}

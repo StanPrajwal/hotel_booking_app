@@ -1,0 +1,56 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+.home-page title{
+    
+    font-size: medium;
+}
+/* .top-cities{
+    display: flex;
+    justify-content: center;
+} */
+.show-case{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    
+}
+.filters input,.filters select{
+    width: 130px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(12, 12, 12);
+}
+.filters{
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.country,.multiple-filters,.city{
+    border: none;
+    border-bottom: 1px solid blue;
+    min-width: 8vw
+}
+.search-by{
+    border-bottom: 1px solid rgb(19, 18, 18);
+    color: blue;
+    font-size: medium;
+    font-weight: bolder;
+}
+.search-by input{
+    border: none;
+    outline: none;
+    margin-left: 0.5rem;
+    vertical-align: top;
+    outline: none;
+}
+.search-by .search{
+    background-color: rgb(101, 101, 241);
+    color:white;
+    transition: all;
+
+}
+.search-by .search:hover{
+    background-color: blue;
+}

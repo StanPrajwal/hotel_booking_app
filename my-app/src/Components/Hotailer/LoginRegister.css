@@ -1,0 +1,152 @@
+
+.hotel-Login-register-form{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    padding: 2rem;
+    
+}
+.hotel-Login-register{
+    align-self: center;
+    justify-self: center;
+    box-shadow: 4px 4px 3px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    padding: 1rem;
+    
+
+}
+.hotel-Login-register .title{
+    color: rgb(14, 10, 7);
+    text-align: center;
+}
+.hotel-Login-register form{
+    padding: 2rem;
+   
+    
+    background-color: #ffff;
+    
+    border-radius: 1rem;
+}
+
+ #register-message{
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0;
+    background-color: rgb(49, 153, 49);
+    color: white;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.hotel-Login-register form .login{
+    padding-top: 1rem;
+}
+.hotel-Login-register form .login{
+    position: relative;
+   
+    border-bottom: 2px solid rgb(12, 43, 182);
+}
+.hotel-Login-register form .login label{
+    transition: 0.15s;
+    position: absolute;
+    left: 0;
+    color: rgb(223, 95, 216) ;
+    font-weight: bold;
+   
+
+}
+input:focus+label,input:not(:placeholder-shown)+label{
+    transform: translateY(-1em);
+    color: rgb(245, 187, 245);
+    font-weight: bold;
+}
+input::placeholder{
+    color: transparent;
+}
+.hotel-Login-register form input{
+    
+    
+    font-size: 15px;
+    padding: 0.5rem;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: rgb(228, 169, 198);
+}
+.hotel-Login-register  .error{
+    color: rgb(221, 78, 78);
+   
+    margin: 0.5rem 0;
+    font-size: small;
+    
+}
+button{
+    margin-top: 1rem;
+    width: 100%;
+    background-color: rgb(109, 49, 223);
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    border:none;
+    font-size:large;
+    font-weight: 700;
+    transition: 0.15s;
+}
+button:hover{
+   opacity: 0.6;
+}
+button:active{
+    background-color: #040670;
+}
+.forget-password{
+    display: block;
+    text-align: right;
+    margin-top: 0.5rem;
+    color: blue;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.forget-password:hover{
+    font-size: 15px;
+   
+}
+.singup-page{
+    text-align:center;
+    color: #bd4daa;
+    padding: 2rem 0;
+    margin-top: 1rem;
+}
+.singup-page .singUp{
+    color:blue;
+    text-decoration: underline;
+    transition: 0.15s;
+    
+}
+.singup-page .singUp:hover{
+    cursor: pointer;
+    color: rgb(128, 0, 107);
+    font-size: 15px;
+}
+.register-form{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 2rem;
+}
+.register-form #sign-btn{
+    padding: 0.2rem;
+    border-radius: 0.8rem;
+    background-color: rgb(3, 105, 100);
+}
+#find-login{
+    color: white;
+    padding-top: 1rem;
+ 
+}
+#find-login span{
+    color: #12bbbb;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.15s;
+}
+#find-login span:hover{
+    font-size: small;
+}

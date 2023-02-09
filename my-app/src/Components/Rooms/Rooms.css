@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+}
+.slides{
+    box-sizing: border-box;
+   
+}
+.slide{
+    width: 350px;
+    height: 280px;
+}
+.slide img{
+  
+   height: 100%; 
+    object-fit: cover;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    box-sizing: border-box;
+}
+.not-found h1{
+    text-align: center;
+    color: rgb(221, 18, 35);
+}
+.Card{
+    margin-top: 2rem;
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:linear-gradient(#ededed, #bab1ba);
+    text-shadow: 0px 1px 0px #e1e2ed;
+    border-radius: 2rem;
+    display: flex;
+    gap: 2rem;
+    
+}
+.hotel-name{
+    color: rgb(5, 7, 139);
+    text-shadow: 0px 1px 0px rgb(5, 7, 139);
+}
+.address{
+    color: red;
+}
+.rating{
+    background-color: rgb(51, 218, 51);
+    color: white;
+    font-weight: 900;
+    padding: 0.3rem;
+    border-radius: .1rem;
+}
+.rooms-container{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20vW;
+    padding: 2rem;
+
+}
+.facility,.btns{
+    display: flex;
+    gap: 2rem;
+}
+.price{
+    color:rgba(4, 119, 29, 0.884);
+}
+.hotel-details{
+    padding:1rem;
+}
+.hotel-details p{
+    margin: 0;
+}
+/* @media only screen and (max-width: 600px){
+    .slide{
+        width: 250px;
+        height: 300px;
+    }
+} */
+.collection,.facility{
+    padding: 0.7rem;
+}
+.collection input,.Facilities input{
+    margin-right: 1rem;
+    cursor: pointer;
+}
+.show-rooms{
+    background:linear-gradient(#ffff,#fffe);
+
+}
+.sideBar{
+    padding: 1rem;
+    display: inline-block;
+    height: 100vh;
+    width: 17%;
+    background-color: #276873;
+    position: fixed;
+    
+}
+.hotel-details{
+    
+}
+/* .filters{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.country,.multiple-filters,.city{
+    border: none;
+    border-bottom: 1px solid blue;
+    min-width: 8vw
+}
+.search-by{
+    border-bottom: 1px solid rgb(19, 18, 18);
+    color: blue;
+    font-size: medium;
+    font-weight: bolder;
+}
+.search-by input{
+    border: none;
+    outline: none;
+    margin-left: 0.5rem;
+    vertical-align: top;
+} */

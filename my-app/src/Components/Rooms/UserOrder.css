@@ -1,0 +1,22 @@
+.user-order{
+    display: flex;
+    gap:2rem;
+    justify-content: center;
+}
+.user-order .title{
+    color:rgb(202, 7, 127)
+}
+.user-order .cancel-booking{
+    background-color: rgb(240, 40, 40);
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.rem;
+    color: white;
+    vertical-align: middle;
+}
+.user-order .confirm-booking{
+    background-color: rgb(90, 241, 76);
+    padding: 0.1rem 0.5rem;
+    border-radius: 0.2rem;
+    color: white;
+    vertical-align: middle;
+}
