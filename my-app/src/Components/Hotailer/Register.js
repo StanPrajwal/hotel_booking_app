@@ -1,16 +1,12 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 import Axios from "axios"
 import "./LoginRegister.css"
 
-function Hotel_Register(){
+function Hotel_Register({setError,getResponse}){
     const [passwordError,setPasswordError] = useState()
-    const [error,setError] = useState('')
-   
-    const navigate = useNavigate()
     const errorCss = {
         color:"red",
         fontWeight:"100"
@@ -32,23 +28,28 @@ function Hotel_Register(){
     if(data.Password === data.ConfirmPassword){
         console.log(data)
         
-        // setPasswordError(false)
-        // Axios.post("",{data})
-        //     .then((res)=>{
-        //         console.log(res)
-        //         setGreeting(res.data)
-        //         reset()
-        //     })
-        //     .catch((err)=>{
-        //         console.log(err.response.data.error)
-        //         setError(err.response.data.error)
-        //     })
+        setPasswordError(false)
+        Axios.post("http://localhost:4000/hotailer",{data})
+            .then((res)=>{
+                console.log(res)
+                getResponse(res.data)
+                reset()
+               
+            })
+            .catch((err)=>{
+                console.log(err.response.data.error)
+                setError(err.response.data.error)
+                setTimeout(()=>{
+                    setError()
+                },5000)
+            })
     }
     else{
         setPasswordError(true)
     }
     
    }
+   
     return <form onSubmit={handleSubmit(onSubmit)} className="register-form" >
                 
                 <div>

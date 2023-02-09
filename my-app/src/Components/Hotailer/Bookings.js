@@ -1,6 +1,17 @@
 import Card from 'react-bootstrap/Card';
 import HotelNavbar from './NavBar';
+import { useEffect, useState } from 'react';
 function Bookings(){
+    const [bookings,getBookings] = useState()
+    useEffect(() => {
+        Axios.get(`http://localhost:4000/booking/hotailer/${localStorage.getItem("hotelToken")}`)
+            .then((res) => {
+                console.log(res.data.bookings)
+                getBookings(res.data.bookings)
+                
+            })
+            .catch((err) => console.log(err))
+    }, [])
     return <div>
         <HotelNavbar/>
         <h2>Total Bookings</h2>

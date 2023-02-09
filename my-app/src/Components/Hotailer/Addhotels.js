@@ -43,6 +43,7 @@ function AddHotels({ Countries }) {
         data.state = data.Sta.split(' ')[1]
         data.country = data.Country.split(' ')[1]
         data.city = data.Citi
+        data.hotailer_id = localStorage.getItem("hotelToken")
         console.log(data)
         Axios.post("http://localhost:4000/hotels",{data})
             .then((res)=>{
@@ -112,7 +113,7 @@ function AddHotels({ Countries }) {
                         >
                             <option>--Choose Country--</option>
                             {Countries && Countries.map((country) => {
-                                return <option value={`${country.isoCode || country.countryCode} ${country.name}`}>{country.name}</option>
+                                return <option key={country.isoCode || country.countryCode} value={`${country.isoCode || country.countryCode} ${country.name}`}>{country.name}</option>
                             })}
                         </select>
                         <p className="error">{errors.Country?.message}</p>
@@ -131,7 +132,7 @@ function AddHotels({ Countries }) {
                         >
                             <option>--Choose State--</option>
                             {states && states.map((state) => {
-                                return <option value={`${state.isoCode} ${state.name}`}>{state.name}</option>
+                                return <option key={state.isoCode} value={`${state.isoCode} ${state.name}`}>{state.name}</option>
                             })}
                         </select>
                         <p className="error">{errors.Sta?.message}</p>
@@ -144,7 +145,7 @@ function AddHotels({ Countries }) {
                             {Cities && Cities.filter(element => {
                                 return element.stateCode === stateCode
                             }).map((city) => {
-                                return <option>{city.name}</option>
+                                return <option key={city.name}>{city.name}</option>
                             })}
                         </select>
                         <p className="error">{errors.Citi?.message}</p>

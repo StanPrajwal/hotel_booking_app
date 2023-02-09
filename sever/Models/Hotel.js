@@ -47,14 +47,26 @@ const hotelSchema = mongoose.Schema({
         required:true
     },
     facililies:[],
-    hotailer:{
+    hotailer_id:{
         type:mongoose.Types.ObjectId,
-        ref:"Owner"
+        ref:"Owner",
+        required:true
     }
 
 })
 
 const Hotel = mongoose.model('Hotel',hotelSchema)
+
+const verifyToken = async(hotailer_id)=>{
+    
+    const token = await jwt.verify(hotailer_id,process.env.jwtKey)
+    // console.log(token)
+    if(token.id){
+        return token.id
+    }
+    return false
+        
+}
 
 const isHotels = async ()=>{
     try {
@@ -67,4 +79,4 @@ const isHotels = async ()=>{
 
 
 
-module.exports = { Hotel,isHotels}
+module.exports = { Hotel,isHotels,verifyToken}

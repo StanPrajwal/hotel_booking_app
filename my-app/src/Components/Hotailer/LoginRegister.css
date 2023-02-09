@@ -15,7 +15,7 @@
 
 }
 .hotel-Login-register .title{
-    color: rgb(14, 10, 7);
+    color: rgb(10, 80, 187);
     text-align: center;
 }
 .hotel-Login-register form{
@@ -43,21 +43,21 @@
 .hotel-Login-register form .login{
     position: relative;
    
-    border-bottom: 2px solid rgb(12, 43, 182);
+    border-bottom: 1px solid rgb(41, 40, 40);
 }
 .hotel-Login-register form .login label{
     transition: 0.15s;
     position: absolute;
     left: 0;
-    color: rgb(223, 95, 216) ;
-    font-weight: bold;
+    color: rgb(105, 103, 105) ;
+    font-weight: 600;
    
 
 }
-input:focus+label,input:not(:placeholder-shown)+label{
+.hotel-Login-register form input:focus+label,.hotel-Login-register form input:not(:placeholder-shown)+label{
     transform: translateY(-1em);
-    color: rgb(245, 187, 245);
-    font-weight: bold;
+    color: rgb(156, 154, 156);
+    font-weight: 600;
 }
 input::placeholder{
     color: transparent;
@@ -70,7 +70,7 @@ input::placeholder{
     outline: none;
     background-color: transparent;
     border: none;
-    color: rgb(228, 169, 198);
+    color: rgb(17, 16, 17);
 }
 .hotel-Login-register  .error{
     color: rgb(221, 78, 78);

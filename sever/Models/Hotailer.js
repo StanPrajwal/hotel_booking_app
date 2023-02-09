@@ -66,7 +66,7 @@ const verifyOwner = async (EmailorPhone, Password) => {
 
         }
         else {
-            console.log(owner)
+            // console.log(owner)
             return false
         }
     } catch (error) {

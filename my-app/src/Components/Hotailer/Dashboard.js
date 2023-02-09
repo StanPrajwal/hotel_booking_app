@@ -8,9 +8,11 @@ import "./LoginRegister.css"
 import Button from 'react-bootstrap/Button';
 import Hotel_Register from "./Register";
 import HotelNavbar from "./NavBar";
+import ModalPopup from "../Rooms/Modal";
 
 function HotailerView() {
-    const [error, setError] = useState("")
+    const [error, setError] = useState()
+    const [response,getResponse] = useState()
     const errorCss = {
         color: "red",
         fontWeight: "100"
@@ -21,18 +23,35 @@ function HotailerView() {
 
 
     })
-    const { register, formState: { errors }, handleSubmit } = useForm({
+    const { register, formState: { errors }, handleSubmit,reset } = useForm({
         resolver: yupResolver(registerSchema)
     })
     const navigate = useNavigate()
     const onSubmit = (data) => {
         console.log(data)
+        Axios.post("http://localhost:4000/hotailer/login",{data})
+            .then((res)=>{
+                localStorage.setItem("hotelToken",res.data.token)
+                reset()
+                navigate('/bookings')
+               
+            })
+            .catch((err)=>{
+                console.log(err.response.data.error)
+                setError(err.response.data.error)
+                setTimeout(()=>{
+                    setError()
+                },5000)
+            })
     }
     return <>
     <HotelNavbar/>
             <h1>
                 Hotel Manager
             </h1>
+            {error ? <div class="alert alert-warning  existed" role="alert">
+            <strong>{error}</strong>
+        </div> : ""}
         <div className="hotel-Login-register-form">
             
             
@@ -80,10 +99,17 @@ function HotailerView() {
                 </section>
                 <section className="hotel-Login-register">
                 <h3 className="title">Hotel Registration</h3>
-                    <Hotel_Register/>
+                    <Hotel_Register
+                        getResponse = {getResponse}
+                        setError = {setError}
+                    />
                 </section>
             
         </div>
+        <ModalPopup
+            response={response}
+            getResponse={getResponse}
+        />
     </>
 }
 

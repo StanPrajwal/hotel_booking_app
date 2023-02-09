@@ -1,7 +1,7 @@
 const routes = require('express').Router()
 const {verifyToken,Book}= require('../Models/Booking')
 const {isExisted} = require("../Models/User")
-
+const {Hotel} = require("../Models/Hotel")
 routes.get('/',async(req,res)=>{
     try {
         const allBooings = await Book.find()
@@ -13,6 +13,30 @@ routes.get('/',async(req,res)=>{
     } catch (error) {
         throw Error
     }
+})
+routes.get('/hotailer/:id',async(req,res)=>{
+    try {
+        const token = await verifyToken(req.params.id)
+        if(token){
+            const hotel = await Hotel.findOne({hotailer_id:token})
+            if(hotel._id){
+                const bookings = await Book.find({hotel_id:hotel._id})
+                if(bookings){
+                    return res.json({
+                        bookings:bookings
+                    })
+                }
+                else{
+                    return res.json({
+                        no:"No Bookings"
+                    })
+                }
+            }
+        }
+    } catch (error) {
+        throw Error
+    }
+
 })
 routes.get('/user/:id',async(req,res)=>{
     try {

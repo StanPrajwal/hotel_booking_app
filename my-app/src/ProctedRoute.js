@@ -13,7 +13,7 @@ const PrivateRoute = () =>{
     )
 }
 const PrivateRouteforHotel = () =>{
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("hotelToken")
     return (
         token?
             <Outlet/>
