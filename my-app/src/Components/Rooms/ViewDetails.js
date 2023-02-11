@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-
+import { DatePicker, Space } from 'antd';
 import { BiRupee, BiBath, BiCctv } from 'react-icons/bi';
 import { AiOutlineWifi, AiOutlineCar } from 'react-icons/ai';
 import { TbElevator } from 'react-icons/tb';
@@ -17,6 +17,7 @@ import NavBar from '../LandingPage/Navbar';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 function ViewDetails() {
+    const { RangePicker } = DatePicker;
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
     const bookingSchema = yup.object().shape({
         full_name: yup.string().required("Field Mandatory"),
@@ -75,12 +76,15 @@ function ViewDetails() {
         }
 
     }
+    const filterByDate =(data)=>{
+        console.log(data)
+    }
 
     return <div>
         <NavBar />
 
         <div className="date-of-booking">
-            <div className="date">
+            {/* <div className="date">
                 <label>Check-In</label>
                 <input type="date"
                     name="from"
@@ -93,7 +97,8 @@ function ViewDetails() {
                     name="to"
                     onChange={(e) => getDate(e)}
                 />
-            </div>
+            </div> */}
+             <RangePicker format='DD-MM-YYYY' onChange={filterByDate}/>
             <div className="no-ofrooms">
                 <label>Rooms</label>
                 <input type="number" min="1"

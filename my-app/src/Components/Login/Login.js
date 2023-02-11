@@ -36,7 +36,7 @@ function Login() {
             .then((res)=>{
                 localStorage.setItem("token",res.data.token)
                 console.log(res.data.token)
-                navigate('/hotel')
+                navigate('/')
                 setFlag(!flag)
 
             })

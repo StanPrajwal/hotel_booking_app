@@ -37,7 +37,7 @@ function HotailerView() {
                
             })
             .catch((err)=>{
-                console.log(err.response.data.error)
+                console.log(err.response?.data.error)
                 setError(err.response.data.error)
                 setTimeout(()=>{
                     setError()

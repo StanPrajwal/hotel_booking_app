@@ -37,7 +37,7 @@ function AddHotels({ Countries }) {
         resolver: yupResolver(hotelSchema)
     })
     const onSubmit = (data)=>{
-        
+        console.log(images)
         data.image_url = images
         data.facililies = data.facililies.split(',')
         data.state = data.Sta.split(' ')[1]
@@ -45,6 +45,7 @@ function AddHotels({ Countries }) {
         data.city = data.Citi
         data.hotailer_id = localStorage.getItem("hotelToken")
         console.log(data)
+       
         Axios.post("http://localhost:4000/hotels",{data})
             .then((res)=>{
                 console.log(res)
@@ -53,12 +54,13 @@ function AddHotels({ Countries }) {
             })
             .catch((err)=>{
                 console.log(err)
+                
                 alert("All Fields are mandatory!")
             })
-        getImages([])
+        // getImages([])
 
     }
-    const getImage = (e)=>{
+    function getImage(e){
        
         
         function preViewFiles(file) {
@@ -66,16 +68,19 @@ function AddHotels({ Countries }) {
             reader.readAsDataURL(file)
         
             reader.onloadend = () => {
-             console.log("Reader",reader.result)
+             console.log(reader.result)
              getImages(prev=>{
                 return [...prev,reader.result]
             })
               
             }
-          }
-          
+        }
+        console.log(e.target.files)
         const file = e.target.files[0]
-        preViewFiles(file)
+        if(file){
+            preViewFiles(file)
+        }
+       
          
         
        
