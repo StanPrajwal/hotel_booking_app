@@ -46,6 +46,11 @@ const hotelSchema = mongoose.Schema({
         type:Number,
         required:true
     },
+   available_rooms:{
+        type:Number,
+        required:true
+    },
+    collections:[],
     facililies:[],
     hotailer_id:{
         type:mongoose.Types.ObjectId,
@@ -57,26 +62,5 @@ const hotelSchema = mongoose.Schema({
 
 const Hotel = mongoose.model('Hotel',hotelSchema)
 
-const verifyToken = async(hotailer_id)=>{
-    
-    const token = await jwt.verify(hotailer_id,process.env.jwtKey)
-    // console.log(token)
-    if(token.id){
-        return token.id
-    }
-    return false
-        
-}
 
-const isHotels = async ()=>{
-    try {
-        const hotels = await Hotel.find()
-        return hotels
-    } catch (error) {
-        return false
-    }
-}
-
-
-
-module.exports = { Hotel,isHotels,verifyToken}
+module.exports = Hotel

@@ -1,5 +1,5 @@
 const routes = require("express").Router()
-const {Owner,isExisted,createOwner,verifyOwner} = require("../Models/Hotailer")
+const {Owner,createOwner,verifyOwner} = require("../Models/Hotailer")
 
 routes.get('/',async(req,res)=>{
     const owners = await Owner.find()
@@ -9,14 +9,6 @@ routes.get('/',async(req,res)=>{
 })
 routes.post("/",async(req,res)=>{
     try {
-        // const {Email,Phone} = req.body
-        // const hotailer = await isExisted(Email,Phone)
-       
-        // if(hotailer){
-        //    return res.status(403).json({
-        //     message:"User Already Existed"
-        //    })
-        // }
         const owner = await createOwner(req.body.data)
         if(owner){
             res.json({
@@ -31,26 +23,28 @@ routes.post("/",async(req,res)=>{
                 error:"User Already Existed!"
             })
          }
-        throw Error
+        throw error
     }
 })
 routes.post("/login",async(req,res)=>{
     try {
         const {EmailOrPhone,Password} = req.body.data
         const token = await verifyOwner(EmailOrPhone,Password)
-        
         if(token){
-           return  res.json({
+            res.json({
                 token:token
             })
         }
         else{
-            return res.status(403).json({
-                error:"Invalid Creadential"
+            res.status(403).json({
+                error:"Unauthorized user!"
             })
         }
     } catch (error) {
-        throw Error
+        res.status(500).json({
+           error:"Page not Found" 
+        })
+        throw error
     }
 })
 

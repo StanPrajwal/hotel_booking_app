@@ -1,7 +1,7 @@
 const routes = require("express").Router()
-const { Hotel, verifyToken } = require('../Models/Hotel')
+const Hotel= require('../Models/Hotel')
 const { getCloudinaryLink } = require("../Cloudinary")
-require("dotenv").config()
+const {verifyToken} = require("../BasicVerification")
 routes.get("/", async (req, res) => {
     try {
         const hotels = await Hotel.find()
@@ -93,9 +93,11 @@ routes.post('/', async (req, res) => {
     try {
 
         const { hotel_name, address, country, state, city, description, hotel_type, image_url, facililies, max_count, price_per_night, pincode, hotailer_id } = req.body.data
-        const token = await verifyToken(hotailer_id)
+        const token = verifyToken(hotailer_id)
+        console.log(token)
         if (token) {
-            const image_URl = await getCloudinaryLink(image_url)
+            const image_URl = getCloudinaryLink(image_url)
+            console.log(image_URl)
             if (image_URl.length) {
                 await Hotel.create({
                     hotel_name,

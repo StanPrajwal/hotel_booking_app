@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+const {createEncryptPassword,decryptPassword,generateJWT} = require('../BasicVerification')
 const userSchema = mongoose.Schema({
     Firstname:{
         type:String,
@@ -40,7 +39,7 @@ const isExisted = async (id) => {
 
 const createUser = async (data) => {
     console.log(data)
-    const hash = await bcrypt.hash(data.Password, 10)
+    const hash = createEncryptPassword(data.Password)
     const user = await User.create({
         Firstname: data.Firstname,
         Lastname: data.Lastname,
@@ -59,9 +58,9 @@ const verifyUser = async (EmailOrPhone, Password) => {
        
         if (user) {
             // console.log(user)
-            const password = await bcrypt.compare(Password, user.Password)
+            const password = decryptPassword(Password, user.Password)
             if (password) {
-                const token = await jwt.sign({ id: user._id }, process.env.jwtKey)
+                const token = generateJWT(user._id)
                 return token
             }
 

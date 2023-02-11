@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
+const {createEncryptPassword,decryptPassword,generateJWT} = require('../BasicVerification')
+
 require("dotenv").config()
 const HotailerSchema = mongoose.Schema({
     Firstname: {
@@ -41,7 +41,7 @@ const isExisted = async (Email, Phone) => {
 
 const createOwner = async (data) => {
 
-    const hash = await bcrypt.hash(data.Password, 10)
+    const hash = createEncryptPassword(data.Password)
     const owner = await Owner.create({
         Firstname: data.Firstname,
         Lastname: data.Lastname,
@@ -56,11 +56,15 @@ const verifyOwner = async (EmailorPhone, Password) => {
     const Phone = EmailorPhone
     try {
         const owner = await Owner.findOne({ $or: [{ Email }, { Phone }] })
+
+        console.log(owner,"details")
         if (owner) {
 
-            const password = await bcrypt.compare(Password, owner.Password)
+            const password = await decryptPassword(Password, owner.Password)
+            console.log(password,"password")
             if (password) {
-                const token = await jwt.sign({ id: owner._id }, process.env.jwtKey)
+                const token = await generateJWT(owner._id)
+                console.log(token,"get")
                 return token
             }
 
@@ -70,7 +74,7 @@ const verifyOwner = async (EmailorPhone, Password) => {
             return false
         }
     } catch (error) {
-        return error.message
+        throw error
     }
 
 
