@@ -10,16 +10,15 @@ const getCloudinaryLink = async(image_url)=>{
     for(let i=0;i<image_url.length;i++){
         if(image_url[i]){
             let image = image_url[i]
-            await cloudinary.v2.uploader.upload(image,
-                 {  upload_preset: "standefault"}, 
-                 function(error, result) {
-                     if(error){
-                         console.log(error.message)
-                         return error.message
-                     }
-                     
-                     image_url[i] = result.url
-                 });
+            try {
+                const result =  await cloudinary.v2.uploader.upload(image,{  upload_preset: "standefault"})
+                console.log(result)
+                image_url[i] = result.url
+                
+            } catch (error) {
+                console.log(error.message)
+            }
+           
         }
         
     }

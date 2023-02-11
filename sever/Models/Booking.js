@@ -64,15 +64,4 @@ const bookingSchema = mongoose.Schema({
 })
 
 const Book = mongoose.model('Book',bookingSchema)
-
-const verifyToken = async(user_id)=>{
-    
-    const token = await jwt.verify(user_id,process.env.jwtKey)
-    // console.log(token)
-    if(token.id){
-        return token.id
-    }
-    return false
-        
-}
-module.exports = {verifyToken,Book}
+module.exports = Book

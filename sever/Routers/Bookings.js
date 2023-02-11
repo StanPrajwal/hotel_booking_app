@@ -1,7 +1,8 @@
 const routes = require('express').Router()
-const {verifyToken,Book}= require('../Models/Booking')
+const Book = require('../Models/Booking')
+const {verifyToken} = require("../BasicVerification")
 const {isExisted} = require("../Models/User")
-const {Hotel} = require("../Models/Hotel")
+const Hotel = require("../Models/Hotel")
 routes.get('/',async(req,res)=>{
     try {
         const allBooings = await Book.find()
@@ -16,31 +17,40 @@ routes.get('/',async(req,res)=>{
 })
 routes.get('/hotailer/:id',async(req,res)=>{
     try {
+        
         const token = await verifyToken(req.params.id)
+        console.log(token)
         if(token){
             const hotel = await Hotel.findOne({hotailer_id:token})
-            if(hotel._id){
+            console.log(hotel)
+            if(hotel){
                 const bookings = await Book.find({hotel_id:hotel._id})
-                if(bookings){
+                console.log(bookings)
+                if(bookings.length){
                     return res.json({
                         bookings:bookings
                     })
                 }
                 else{
                     return res.json({
-                        no:"No Bookings"
+                        message:"No Bookings..."
                     })
                 }
+            }else{
+                return res.json({
+                    message:"You Didnot add any hotel rooms yet!"
+                })
             }
         }
     } catch (error) {
-        throw Error
+        throw error
     }
 
 })
 routes.get('/user/:id',async(req,res)=>{
+    // console.log(req.params.id)
     try {
-        const token = await verifyToken(req.params.id)
+        const token =  verifyToken(req.params.id)
         console.log(token)
         if(token){
             
@@ -68,24 +78,15 @@ routes.get('/user/:id',async(req,res)=>{
 routes.post('/',async(req,res)=>{
     try {
         
-        const {email,phone,full_name,number_of_guest,number_of_rooms,from,to,hotel_id,user_id,payment,total_price,price_per_day,hotel_name,hotel_address} = req.body.data
+        const {data} = req.body
         
-        const token = await verifyToken(user_id)
+        const token =  verifyToken(data.user_id)
         if(token){
-            const  user = await isExisted(token)
+            const  user = isExisted(token)
             if(user){
                 // console.log(user)
-                await Book.create({
-                    email,
-                    phone,
-                    full_name,
-                    number_of_guest,
-                    number_of_rooms,
-                    from,to,hotel_id,
-                    user_id:user,
-                    payment,
-                    total_price,price_per_day,hotel_name,hotel_address
-                })
+                data.user_id = user
+                await Book.create({data})
                 res.json({
                     greeting:"Thank You!",
                     message:"Your Booking Completed."
@@ -112,12 +113,12 @@ routes.delete("/user/:id",async(req,res)=>{
     try {
         
         const id = req.params.id.split("-")
-        console.log(id)
-        const token = await verifyToken(id[0])
+        // console.log(id)
+        const token =  verifyToken(id[0])
         if(token){
-            const  user = await isExisted(token)
+            const  user = isExisted(token)
             if(user){
-            const deleteBook =    await Book.deleteOne({$and:[{user_id:token},{_id:id[1]}]})
+            const deleteBook = await Book.deleteOne({$and:[{user_id:token},{_id:id[1]}]})
             console.log(deleteBook)
             res.json({
                 message:"Booking Canceled"

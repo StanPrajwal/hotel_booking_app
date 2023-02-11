@@ -10,9 +10,9 @@ const bookingRouter = require('./Routers/Bookings')
 require('dotenv').config()
 
 const app = express()
-app.use(bodyParser.json())
 app.use(cors())
-
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use("/hotailer",hotailerRouter)
 app.use("/hotels",hotelRouter)
 app.use('/user',userRouter)
